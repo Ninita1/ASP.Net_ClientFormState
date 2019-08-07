@@ -6,7 +6,7 @@ With platforms developed in Angular or React (for example) this would be simpler
 
 The biggest problem is the platform architecture. In a simple project it would be enough to ensure that the last opened page was reopened and save the form data. However, when the customer actually asks for something as described above, it is best to prepare for some unnecessary headaches.
 
-In this repository is a solution to one of these complex cases. The solution is designed to be as generic as possible but may need to be adapted to the reality of the project concerned.
+In this repository is a solution to one of these complex cases. The solution is designed to be as generic as possible but may need to be adapted to the reality of the project concerned. This solution is based on a user click memory system, as there may be pivot tables or behaviors created later.
 
 
 ## Dependencies:
@@ -112,7 +112,7 @@ For example:
     }
 
 
-5. On every click event to end/cancel something that you want to remember, call the `AppState.CancelLastPageClick()` method. It will make the state manager to  forget the last click registered. For example:
+5. On every click event to end/cancel something that you do not need to remember anymore, call the `AppState.CancelLastPageClick()` method. It will make the state manager to  forget the last click registered. For example:
 
             $("#openModalToCreate").on("click", function (e) {
                 e.preventDefault();
@@ -150,3 +150,15 @@ For example:
                 });
             });
 
+
+6. On each menu that you want to reset the platform state, reset the state calling the `AppState.CleanState()` method on the menu click event:
+
+        <a href="#" onclick="AppState.CleanState('https://github.com/repos')">My Repos</a>
+        
+        
+7. Do the same on the log out click event but calling the `AppState.LogOut()` method:
+
+        <a href="#" onclick="AppState.LogOut('https://github.com/logoff')">Logout</a>
+
+
+### I hope this can helps you. Have a nice day!
